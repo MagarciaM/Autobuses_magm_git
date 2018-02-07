@@ -167,6 +167,40 @@ public class Operaciones {
             throw new SQLException(msjerror, "");
         }
     }
+    /**
+     * Método que genera un objeto Estacion completo a partir de una localidad
+     * 
+     * @param localidad Parámetro id_estacion que contiene el id de la
+     * estación que queremos obtener le objeto
+     * @return El método devuelve un objeto Estación completo
+     * @throws SQLException 
+     */
+        public Estacion getEstacion(String localidad) throws SQLException {
+
+        String ordenSQL = "SELECT * FROM estacion WHERE localidad='" + localidad + "';";
+
+        try {
+            Statement s = Conexion.createStatement();
+            ResultSet res = s.executeQuery(ordenSQL);
+
+            if (res.next()) {
+
+                int id_estacion = Integer.parseInt(res.getString("id_estacion"));
+                String direccion = res.getString("direccion");
+                String nombre = res.getString("nombre");
+
+                Estacion E = new Estacion(id_estacion, localidad, direccion, nombre);
+                return E;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException sqle) {
+            String msjerror = sqle.getMessage();
+            //String codigo.parseInt(sqle.getErrorCode());
+            throw new SQLException(msjerror, "");
+        }
+    }
 
     /**
      * Método que genera un objeto Empresa completo extraido de la base datos

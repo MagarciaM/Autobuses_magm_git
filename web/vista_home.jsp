@@ -112,7 +112,7 @@
                                 <br>
                                 
                                 <label for="fecha"> Nº de billetes </label>
-                                <input class="form-control" type="number" id="billetes" name="billetes" min="0" max="8" required>
+                                <input class="form-control" type="number" id="billetes" name="billetes" min="1" max="8" required>
                                 <br>
 
                                 <button type="submit" class="btn btn-info"> Comprobar Disponibilidad </button>

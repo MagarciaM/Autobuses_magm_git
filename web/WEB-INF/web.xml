@@ -12,6 +12,14 @@
         <servlet-name>servlet_buscarViaje</servlet-name>
         <servlet-class>servlet.servlet_buscarViaje</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servlet_viaje_seleccionado</servlet-name>
+        <servlet-class>servlet.servlet_viaje_seleccionado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet_infoViajeros</servlet-name>
+        <servlet-class>servlet.servlet_infoViajeros</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servlet_preHome</servlet-name>
         <url-pattern>/servlet_preHome</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>servlet_buscarViaje</servlet-name>
         <url-pattern>/servlet_buscarViaje</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_viaje_seleccionado</servlet-name>
+        <url-pattern>/servlet_viaje_seleccionado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_infoViajeros</servlet-name>
+        <url-pattern>/servlet_infoViajeros</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

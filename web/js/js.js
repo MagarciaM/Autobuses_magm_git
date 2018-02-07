@@ -43,9 +43,9 @@ function responder () {
     }
 }
 
-function seleccionHorario (hSalida, hLlegada, nBilletes, precio) {
+function seleccionHorario (plazasOcupadas, hSalida, hLlegada, nBilletes, precio) {
     //alert(obj);
-
+    
     $('#hSalida').children().remove();
     $('#hLlegada').children().remove();
     $('#calculo').children().remove();
@@ -53,6 +53,11 @@ function seleccionHorario (hSalida, hLlegada, nBilletes, precio) {
 
     $('#hSalida').append("<p> <b> Hora Salida: </b> " + hSalida + "</p>");
     $('#hLlegada').append("<p> <b> Hora Llegada: </b> " + hLlegada + "</p>");
+    
+    $('#input_hSalida').attr("value", hSalida);
+    $('#input_hLlegada').attr("value", hLlegada);
+    $('#input_plazasOcupadas').attr("value", plazasOcupadas);
+    $('#input_precio').attr("value", precio);
 
     $('#calculo').append("<div> " + precio + "€ x " + nBilletes + " Billetes = " + (nBilletes*precio) + "€ </div>");
     $('#precioTotal').append("<div> Precio Total " + (nBilletes*precio) + "€ </div>");

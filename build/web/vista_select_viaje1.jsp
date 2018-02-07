@@ -49,8 +49,6 @@
                                     <span class="badge  badge-info"> 4 </span>
                                     Finaliza tu compra 
                                 </a-->
-                                <button class="btn"> Atrás </button>
-                                <button class="btn btn-primary"> Continuar </button>
                             </div>
                         </nav>
                         <br>
@@ -77,10 +75,10 @@
                                         </div>
                                         <div class="card-body col-md-2">
                                             <h5 class="card-title"> Precio </h5>
-                                            <p class="card-text"> <strong><% out.print(S.getPrecio()); %>€ </strong> Billete </p>
+                                            <p class="card-text"> <strong><% out.print(S.getPrecio());%>€ </strong> Billete </p>
                                         </div>
                                         <div class="card-body col-md-2 text-white">
-                                            <a onclick="seleccionHorario('<% out.print(S.getPosiblesViajes().get(i).getHora_salida()); %>', '<% out.print(S.getPosiblesViajes().get(i).getHora_llegada()); %>', '<% out.print(S.getnBilletes()); %>', '<% out.print(S.getPrecio()); %>')" class="btn btn-primary"> Seleccionar </a>
+                                            <a onclick="seleccionHorario('<% out.print(S.getPosiblesViajes().get(i).getPlazas_ocupadas()); %>', '<% out.print(S.getPosiblesViajes().get(i).getHora_salida()); %>', '<% out.print(S.getPosiblesViajes().get(i).getHora_llegada()); %>', '<% out.print(S.getnBilletes()); %>', '<% out.print(S.getPrecio()); %>')" class="btn btn-primary"> Seleccionar </a>
                                         </div>
                                     </div>
                                     <div class="card-footer text-muted">
@@ -246,62 +244,77 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card bg-info border-info">
-                            <div class="card-header text-white text-center">
-                                <h5> Resumen </h5>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="card-header text-center border-info">
-                                        <h6> Tu busqueda </h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>
-                                            <b> Origen: </b>
-                                            <% out.print(S.getEstacionOrigen().getLocalidad()); %>
-                                        </p>
-
-                                        <p>
-                                            <b> Destino: </b>
-                                            <% out.print(S.getEstacionDestino().getLocalidad()); %>
-                                        </p>
-
-                                        <p>
-                                            <b> Fecha: </b>
-                                            <% out.print(S.getFecha());%>
-                                        </p>
-
-                                        <p>
-                                            <b> Nº Billetes: </b>
-                                            <% out.print(S.getnBilletes());%>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="card-header text-center border-info">
-                                        <h6> Horario Seleccionado </h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <p id="hSalida">
-                                        </p>
-                                        <p id="hLlegada">
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="list-group-item bg-info text-white text-center">
-                                    <p id="calculo">
-                                    </p>
-                                    <h4 id="precioTotal"> 
-                                        <div>
-                                            Precio Total 0,00€                                  
+                        <form method="post" accept-charset="utf-8" action="servlet_viaje_seleccionado">
+                            <a href="vista_home.jsp" class="btn btn-secondary"> Atrás </a>
+                            <button type="submit" class="btn btn-primary"> Continuar </button><br><br>
+                            <div class="card bg-info border-info">
+                                <div class="card-header text-white text-center">
+                                    <h5> Resumen </h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="card-header text-center border-info">
+                                            <h6> Tu busqueda </h6>
                                         </div>
-                                    </h4>
-                                </li>
-                            </ul>
-                        </div>
+                                        <div class="card-body">
+                                            <p>
+                                                <b> Origen: </b>
+                                                <% out.print(S.getEstacionOrigen().getLocalidad()); %>
+                                                <input type="text" name="origen" hidden value="<% out.print(S.getEstacionOrigen().getLocalidad()); %>">
+                                            </p>
+
+                                            <p>
+                                                <b> Destino: </b>
+                                                <% out.print(S.getEstacionDestino().getLocalidad()); %>
+                                                <input type="text" name="destino" hidden value="<% out.print(S.getEstacionDestino().getLocalidad()); %>">
+                                            </p>
+
+                                            <p>
+                                                <b> Fecha: </b>
+                                                <% out.print(S.getFecha());%>
+                                                <input type="text" name="fecha" hidden value="<% out.print(S.getFecha());%>">
+                                            </p>
+
+                                            <p>
+                                                <b> Nº Billetes: </b>
+                                                <% out.print(S.getnBilletes());%>
+                                                <input type="text" name="nBilletes" hidden value="<% out.print(S.getnBilletes());%>">
+                                                <input type="text" name="distancia" hidden value="<% out.print(S.getDistancia());%>">
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="card-header text-center border-info">
+                                            <h6> Horario Seleccionado </h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <p id="hSalida">
+                                            </p>
+                                            <input type="text" name="hSalida" id="input_hSalida" hidden value="">
+                                            
+                                            <p id="hLlegada">
+                                            </p>
+                                            <input type="text" name="hLlegada" id="input_hLlegada" hidden value="">
+                                            
+                                            <input type="text" name="plazasOcupadas" id="input_plazasOcupadas" hidden value="">
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item bg-info text-white text-center">
+                                        <p id="calculo">
+                                        </p>
+                                        <h4 id="precioTotal"> 
+                                            <div>
+                                                Precio Total 0,00€                   
+                                            </div>                                            
+                                        </h4>
+                                        <input type="number" name="precio" id="input_precio" hidden value="" required>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
+        </div><br><br>
     </body>
 </html>

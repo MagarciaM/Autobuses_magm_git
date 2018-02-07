@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm/src/java/dao/Operaciones.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/PosibleViaje.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/vista_select_viaje1.jsp</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/servlet/servlet_preHome.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/js/js.js</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/servlet/servlet_viaje_seleccionado.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/vista_infoViajeros.jsp</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/Seleccionado.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/servlet/servlet_buscarViaje.java</file>
         </group>
     </open-files>
 </project-private>
