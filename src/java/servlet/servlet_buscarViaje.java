@@ -58,15 +58,16 @@ public class servlet_buscarViaje extends HttpServlet {
             ArrayList<Viaje> arrayViajes = new Operaciones(Conexion).getViajes(arrayHorarios, fecha);
             
             // Contruimos un ArrayList de obj PosibleViaje y se lo añadimos al obj Selecionado
-            ArrayList<PosibleViaje> array_posiblesViajes = new ArrayList();
+            /*ArrayList<PosibleViaje> array_posiblesViajes = new ArrayList();
             for (int i=0 ; i<arrayHorarios.size() ; i++) {           
                 PosibleViaje Pv = new PosibleViaje(arrayHorarios.get(i).getHora_salida(), arrayHorarios.get(i).getHora_llegada(), arrayViajes.get(i).getPlazas_ocupadas());
                 array_posiblesViajes.add(Pv);
                 
-            }
+            }*/
             
+            // Recuperamos el ArrayList de Viajes que nos devuelve desde Operaciones y lo añadimos al obj Selecionado
             // Contruimos el obj Selecionado
-            Seleccionado S = new Seleccionado(E1, E2, fecha, R.getPrecio(), R.getDistancia(), nBilletes, array_posiblesViajes);
+            Seleccionado S = new Seleccionado(E1, E2, fecha, R.getPrecio(), R.getDistancia(), nBilletes, arrayViajes);
 
             HttpSession session = request.getSession(true);
             session.setAttribute("seleccionado",S);

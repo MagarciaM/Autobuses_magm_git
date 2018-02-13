@@ -36,7 +36,7 @@ public class Horario {
         this.hora_llegada = hora_llegada;
         this.dia = dia;
     }
-    
+ 
     /**
      * 
      * @param id Parámetro id de horario

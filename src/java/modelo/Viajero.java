@@ -13,6 +13,7 @@ import java.time.LocalDate;
  */
 public class Viajero {
     
+    private int idViajero;
     private String dni;
     private String nombre;
     private String apellidos;
@@ -23,6 +24,21 @@ public class Viajero {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNac = fechaNac;
+    }
+    
+    public Viajero(int idViajero, String dni, String nombre, String apellidos, LocalDate fechaNac) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNac = fechaNac;
+    }
+    
+    public Viajero(int idViajero) {
+        this.idViajero = idViajero;
+    }
+
+    public void setIdViajero(int idViajero) {
+        this.idViajero = idViajero;
     }
 
     public void setDni(String dni) {
@@ -39,6 +55,10 @@ public class Viajero {
 
     public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
+    }
+
+    public int getIdViajero() {
+        return idViajero;
     }
 
     public String getDni() {
@@ -59,6 +79,6 @@ public class Viajero {
 
     @Override
     public String toString() {
-        return "Viajero{" + "dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNac=" + fechaNac + '}';
+        return "Viajero{" + "idViajero=" + idViajero + ", dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNac=" + fechaNac + '}';
     }
 }

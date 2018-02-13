@@ -23,16 +23,16 @@ public class Seleccionado {
     private float precio;
     private int distancia;
     private int nBilletes;
-    ArrayList<PosibleViaje> posiblesViajes;
+    ArrayList<Viaje> Viajes;
 
-    public Seleccionado(Estacion estacionOrigen, Estacion estacionDestino, LocalDate fecha, float precio, int distancia, int nBilletes, ArrayList<PosibleViaje> posiblesViajes) {
+    public Seleccionado(Estacion estacionOrigen, Estacion estacionDestino, LocalDate fecha, float precio, int distancia, int nBilletes, ArrayList<Viaje> Viajes) {
         this.estacionOrigen = estacionOrigen;
         this.estacionDestino = estacionDestino;
         this.fecha = fecha;
         this.precio = precio;
         this.distancia = distancia;
         this.nBilletes = nBilletes;
-        this.posiblesViajes = posiblesViajes;
+        this.Viajes = Viajes;
     }
 
     public void setEstacionOrigen(Estacion estacionOrigen) {
@@ -59,8 +59,8 @@ public class Seleccionado {
         this.nBilletes = nBilletes;
     }
 
-    public void setPosiblesViajes(ArrayList<PosibleViaje> posiblesViajes) {
-        this.posiblesViajes = posiblesViajes;
+    public void setViajes(ArrayList<Viaje> Viajes) {
+        this.Viajes = Viajes;
     }
 
     public Estacion getEstacionOrigen() {
@@ -87,12 +87,12 @@ public class Seleccionado {
         return nBilletes;
     }
 
-    public ArrayList<PosibleViaje> getPosiblesViajes() {
-        return posiblesViajes;
+    public ArrayList<Viaje> getViajes() {
+        return Viajes;
     }
 
     @Override
     public String toString() {
-        return "Seleccionado{" + "estacionOrigen=" + estacionOrigen + ", estacionDestino=" + estacionDestino + ", fecha=" + fecha + ", precio=" + precio + ", distancia=" + distancia + ", nBilletes=" + nBilletes + ", posiblesViajes=" + posiblesViajes + '}';
+        return "Seleccionado{" + "estacionOrigen=" + estacionOrigen + ", estacionDestino=" + estacionDestino + ", fecha=" + fecha + ", precio=" + precio + ", distancia=" + distancia + ", nBilletes=" + nBilletes + ", Viajes=" + Viajes + '}';
     }
 }

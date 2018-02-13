@@ -5,8 +5,6 @@
  */
 package modelo;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author magm
@@ -14,31 +12,21 @@ import java.util.ArrayList;
 public class Billete {
     
     private Seleccionado objSeleccionado;
-    private ArrayList<Viajero> arrayViajeros;
 
-    public Billete(Seleccionado objSeleccionado, ArrayList<Viajero> arrayViajeros) {
+    public Billete(Seleccionado objSeleccionado) {
         this.objSeleccionado = objSeleccionado;
-        this.arrayViajeros = arrayViajeros;
     }
 
     public void setObjSeleccionado(Seleccionado objSeleccionado) {
         this.objSeleccionado = objSeleccionado;
     }
 
-    public void setArrayViajeros(ArrayList<Viajero> arrayViajeros) {
-        this.arrayViajeros = arrayViajeros;
-    }
-
     public Seleccionado getObjSeleccionado() {
         return objSeleccionado;
     }
 
-    public ArrayList<Viajero> getArrayViajeros() {
-        return arrayViajeros;
-    }
-
     @Override
     public String toString() {
-        return "Billete{" + "objSeleccionado=" + objSeleccionado + ", arrayViajeros=" + arrayViajeros + '}';
+        return "Billete{" + "objSeleccionado=" + objSeleccionado + '}';
     }
 }

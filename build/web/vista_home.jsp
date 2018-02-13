@@ -122,7 +122,7 @@
                 </div>
                 <div class="row jumbotron">
                     <div class="container">
-                        <h2 class="display-4"> Conacto </h2> <br>
+                        <h2 class="display-4"> Contacto </h2> <br>
                         <!-- Usamos los datos de empresa que recibir por session -->
                         <h4> Nombre: </h4> <p> <% out.print(objEmpresa.getNombre()); %> </p>
                         <h4> NIF: </h4> <p> <% out.print(objEmpresa.getNif()); %> </p>

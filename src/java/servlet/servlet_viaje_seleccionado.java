@@ -27,6 +27,7 @@ import modelo.*;
 public class servlet_viaje_seleccionado extends HttpServlet {
 
     private Connection Conexion;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,44 +46,52 @@ public class servlet_viaje_seleccionado extends HttpServlet {
              * formulario que se encuentra oculto al usuario para poder rescatar
              * los datos aqui y montar el obj correspondiente
              */
+
+            // Recuperamos de session el obj Seleccionado y terminamos de completarlo con los datos que ha elegido el usuario
+            HttpSession session = request.getSession(true);
+            Seleccionado S_session = (Seleccionado) session.getAttribute("Seleccionado");
+
             String origen = request.getParameter("origen");
             String destino = request.getParameter("destino");
-            LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));            
+            LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
             float precio = Float.parseFloat(request.getParameter("precio"));
             int distancia = Integer.parseInt(request.getParameter("distancia"));
             int nBilletes = Integer.parseInt(request.getParameter("nBilletes"));
-            
+
             LocalTime hSalida = LocalTime.parse(request.getParameter("hSalida"));
             LocalTime hLlegada = LocalTime.parse(request.getParameter("hLlegada"));
+            int idHorario = Integer.parseInt(request.getParameter("idHorario"));
             int plazasOcupadas = Integer.parseInt(request.getParameter("plazasOcupadas"));
-            
-            PosibleViaje pv = new PosibleViaje(hSalida, hLlegada, plazasOcupadas);
-            
-            ArrayList<PosibleViaje> array_posiblesViajes = new ArrayList();
-            array_posiblesViajes.add(pv);
-            
+
+            // Construimos los objcorrespondientes 
             try {
                 Estacion E1 = new Operaciones(Conexion).getEstacion(origen);
                 Estacion E2 = new Operaciones(Conexion).getEstacion(destino);
-                
-                Seleccionado S = new Seleccionado(E1, E2, fecha, precio, distancia, nBilletes, array_posiblesViajes);
+
+                Horario objHorario = new Operaciones(Conexion).getHorario(idHorario);
+
+                Viaje objViaje = new Operaciones(Conexion).getViaje(objHorario.getId());
+
+                ArrayList<Viaje> array_Viajes = new ArrayList();
+                array_Viajes.add(objViaje);
+
+                Seleccionado S_competo = new Seleccionado(E1, E2, fecha, precio, distancia, nBilletes, array_Viajes);
                 //out.print(S);
                 // Subimos a session el obj selecionado
-                HttpSession session = request.getSession(true);
-                session.setAttribute("S", S);
+
+                session.setAttribute("S", S_competo);
                 response.sendRedirect("vista_infoViajeros.jsp");
             } catch (SQLException sqle) {
-                
+
             }
         }
-        
-        
+
     }
 
     @Override
     public void init() throws ServletException {
         //super.init(); //To change body of generated methods, choose Tools | Templates.
-        
+
         /* Establecemos la conexión, si no existe */
         try {
             ConexionBBDD ConexBD = ConexionBBDD.GetConexion();

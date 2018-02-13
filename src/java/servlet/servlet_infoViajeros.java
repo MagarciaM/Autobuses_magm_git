@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import dao.ConexionBBDD;
+import dao.*;
 import modelo.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
 public class servlet_infoViajeros extends HttpServlet {
 
     private Connection Conexion;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,33 +40,81 @@ public class servlet_infoViajeros extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            HttpSession session = request.getSession(true);
-            Seleccionado S = (Seleccionado)session.getAttribute("S");
-            
-            ArrayList<Viajero> arrayViajeros = new ArrayList();
 
-            for (int i=1 ; i<=S.getnBilletes() ; i++) {
-                
-                String dni = request.getParameter("dni"+i);
-                String nombre = request.getParameter("nombre"+i);
-                String apellidos = request.getParameter("apellidos"+i);
-                LocalDate fechaNac = LocalDate.parse(request.getParameter("fechaNac"+i));
-                
-                Viajero V = new Viajero(dni, nombre, apellidos, fechaNac);     
-                arrayViajeros.add(V);
+            HttpSession session = request.getSession(true);
+            Seleccionado S = (Seleccionado) session.getAttribute("S");
+
+            // Construimos un ArrayList de Viajeros y luego añadimos el asiento correspondiente, ya que el array admite tanto obj_Viajero como obj_ViajeroAsiento
+            ArrayList<Viajero> array_ViajerosNuevos = new ArrayList();
+
+            for (int i = 1; i <= S.getnBilletes(); i++) {
+
+                String dni = request.getParameter("dni" + i);
+                String nombre = request.getParameter("nombre" + i);
+                String apellidos = request.getParameter("apellidos" + i);
+                LocalDate fechaNac = LocalDate.parse(request.getParameter("fechaNac" + i));
+
+                Viajero objViajero = new Viajero(dni, nombre, apellidos, fechaNac);
+                array_ViajerosNuevos.add(objViajero);
             }
             
-            Billete objBillete = new Billete(S,arrayViajeros);
+            // AL selecionar el viaje nos traemos los viajeros (solo id y numero de asiento) de ese viaje, y solo damos opcion de selecionar los asientos libres a los nuevos viajeros
+            ArrayList<Viajero> arrayViajeros = new ArrayList();
+            
+            // Monstamos un array de plazas ocupadas para este viaje
+            ArrayList<Integer> array_plazasOcupadas = new ArrayList();
+            ArrayList<Integer> array_plazasLibres = new ArrayList();
+            
+            try {
+                ArrayList<ViajeroAsiento> array_ViajeroAsiento = new Operaciones(Conexion).getViajero_Asiento(S.getViajes().get(0).getId_viaje());               
+                
+                // LLenamos el arrayList de viajeros del objSelecionado, con los viajeros con asiento que hemos extraido del viaje correspondiente.
+                for (int i=0 ; i<array_ViajeroAsiento.size() ; i++) {
+                    arrayViajeros.add(array_ViajeroAsiento.get(i));
+                    
+                    // Rellenamos un array de plazas ocupadas y creamos uno de plazas libres con la diferencia entre ese el total de plazas
+                    array_plazasOcupadas.add(array_ViajeroAsiento.get(i).getnAsiento());
+                }
+                
+                S.getViajes().get(0).setViajeros(arrayViajeros);
+                
+            } catch (SQLException sqle) {
+                
+            }
+            
+            // Montamos un raay de plazas libres
+            for (int i=1 ; i<=8 ; i++) {
+
+                if (array_plazasOcupadas.contains(i)) {
+                    
+                } else {
+                    array_plazasLibres.add(i);
+                }
+            }
+            
+            Billete objBillete = new Billete(S);
+            
+            // Subimos a session, el objBillete que contiene el objSelecionado que contiene un array de Viajeros que ya se encuentran en el viaje
+            // Y subimos el array de viajeros que se van a añadir al viaje y a falta de seleccionar su asiento
             session.setAttribute("objBillete", objBillete);
+            session.setAttribute("arrayViajerosNuevos", array_ViajerosNuevos);
+            session.setAttribute("array_plazasLibres", array_plazasLibres);
             response.sendRedirect("vista_selecAsientos.jsp");
+            
+            /*out.print(objBillete);
+            out.print("<br>///<br>");
+            out.print(array_ViajerosNuevos);
+            out.print("<br>///<br>");
+            out.print(array_plazasOcupadas);
+            out.print("<br>///<br>");
+            out.print(array_plazasLibres);*/
         }
     }
 
     @Override
     public void init() throws ServletException {
         //super.init(); //To change body of generated methods, choose Tools | Templates.
-        
+
         /* Establecemos la conexión, si no existe */
         try {
             ConexionBBDD ConexBD = ConexionBBDD.GetConexion();
@@ -74,8 +123,6 @@ public class servlet_infoViajeros extends HttpServlet {
         } catch (SQLException sqle) {
         }
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

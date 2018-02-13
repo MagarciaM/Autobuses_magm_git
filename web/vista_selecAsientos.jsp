@@ -4,6 +4,7 @@
     Author     : magm
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,6 +23,8 @@
         <%
             Empresa objEmpresa = (Empresa) session.getAttribute("objEmpresa");
             Billete objBillete = (Billete) session.getAttribute("objBillete");
+            ArrayList<Viajero> arrayViajerosNuevos = (ArrayList<Viajero>) session.getAttribute("arrayViajerosNuevos");
+            ArrayList<Integer> array_plazasLibres = (ArrayList<Integer>) session.getAttribute("array_plazasLibres");
         %>
         <div class="contenido">
             <div class="container-fluid">
@@ -50,11 +53,17 @@
                                             <form>
                                                 <div class="form-group row">
                                                     <% for (int i = 1; i <= objBillete.getObjSeleccionado().getnBilletes(); i++) {%>
-                                                    <label id="nombrePasajero<% out.print(i); %>" class="col-sm-8 col-form-label"><p><% out.print(objBillete.getArrayViajeros().get(i-1).getNombre()); %> </p></label>
+                                                    
+                                                    <% 
+                                                        String nombre = arrayViajerosNuevos.get(i-1).getNombre();
+                                                    %>
+                                                    
+                                                    <label id="nombrePasajero<% out.print(i); %>" class="col-sm-8 col-form-label"><p><% out.print(nombre); %> </p></label>
                                                     <div class="col-sm-4">
                                                         <select class="form-control" id="selectViajero<% out.print(i); %>">
-                                                            <% for (int j = 1; j <= 8; j++) {%>
-                                                            <option> Nº<% out.print(j); %> </option>
+                                                            <% for (int j=0; j < array_plazasLibres.size() ; j++) {%>
+                                                            
+                                                            <option value="<% out.print(array_plazasLibres.get(j)); %>"> Nº<% out.print(array_plazasLibres.get(j)); %> </option>
                                                             <% } %>
                                                         </select>
                                                     </div>
@@ -114,12 +123,12 @@
                                         </div>
                                         <div class="card-body">
                                             <p id="hSalida">
-                                                <% out.print("<b> Hora Salida: </b>" + objBillete.getObjSeleccionado().getPosiblesViajes().get(0).getHora_salida()); %>
+                                                <% out.print("<b> Hora Salida: </b>" + objBillete.getObjSeleccionado().getViajes().get(0).getHorario().getHora_salida()); %>
                                             </p>
                                             <input type="text" name="hSalida" id="input_hSalida" hidden value="">
 
                                             <p id="hLlegada">
-                                                <% out.print("<b> Hora Llegada: </b>" + objBillete.getObjSeleccionado().getPosiblesViajes().get(0).getHora_llegada()); %>
+                                                <% out.print("<b> Hora Llegada: </b>" + objBillete.getObjSeleccionado().getViajes().get(0).getHorario().getHora_llegada()); %>
                                             </p>
                                             <input type="text" name="hLlegada" id="input_hLlegada" hidden value="">
 

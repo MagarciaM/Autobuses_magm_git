@@ -167,15 +167,16 @@ public class Operaciones {
             throw new SQLException(msjerror, "");
         }
     }
+
     /**
      * Método que genera un objeto Estacion completo a partir de una localidad
-     * 
-     * @param localidad Parámetro id_estacion que contiene el id de la
-     * estación que queremos obtener le objeto
+     *
+     * @param localidad Parámetro id_estacion que contiene el id de la estación
+     * que queremos obtener le objeto
      * @return El método devuelve un objeto Estación completo
-     * @throws SQLException 
+     * @throws SQLException
      */
-        public Estacion getEstacion(String localidad) throws SQLException {
+    public Estacion getEstacion(String localidad) throws SQLException {
 
         String ordenSQL = "SELECT * FROM estacion WHERE localidad='" + localidad + "';";
 
@@ -338,8 +339,8 @@ public class Operaciones {
                     //int id_horario = res.getInt("id_horario");
                     //LocalDate fecha = LocalDate.parse(res.getString("fecha"));
                     int plazas_ocupadas = res.getInt("plazas_ocupadas");
-                    
-                    Viaje V = new Viaje(id_viaje, arrayHorarios.get(i).getId(), fecha, plazas_ocupadas);
+
+                    Viaje V = new Viaje(id_viaje, arrayHorarios.get(i), fecha, plazas_ocupadas);
                     arrayViajes.add(V);
                 }
 
@@ -349,7 +350,127 @@ public class Operaciones {
                 throw new SQLException(msjerror, "");
             }
         }
-        
+
         return arrayViajes;
+    }
+
+    public int get_idViajero(String dni) throws SQLException {
+        String ordenSQL = "SELECT id_viajero FROM viajero WHERE nif='" + dni + "';";
+
+        try {
+            Statement s = Conexion.createStatement();
+            ResultSet res = s.executeQuery(ordenSQL);
+
+            if (res.next()) {
+
+                int id = res.getInt("id_viajero");
+                return id;
+            } else {
+                return -1;
+            }
+
+        } catch (SQLException sqle) {
+            String msjerror = sqle.getMessage();
+            //String codigo.parseInt(sqle.getErrorCode());
+            throw new SQLException(msjerror, "");
+        }
+    }
+
+    public Horario getHorario(int idHorario) throws SQLException {
+
+        String ordenSQL = "SELECT * FROM horario WHERE id_horario = '" + idHorario + "';";
+
+        try {
+            Statement s = Conexion.createStatement();
+            ResultSet res = s.executeQuery(ordenSQL);
+
+            if (res.next()) {
+
+                int id_horario = res.getInt("id_horario");
+                int id_ruta = res.getInt("id_ruta");
+                LocalTime hora_salida = res.getTime("hora_salida").toLocalTime();
+                LocalTime hora_llegada = res.getTime("hora_llegada").toLocalTime();
+                String dia = res.getString("dia");
+
+                Horario objHorario = new Horario(id_horario, id_ruta, hora_salida, hora_llegada, dia);
+                return objHorario;
+            } else {
+                return null;
+            }
+        } catch (SQLException sqle) {
+            String msjerror = sqle.getMessage();
+            //String codigo.parseInt(sqle.getErrorCode());
+            throw new SQLException(msjerror, "");
+        }
+    }
+
+    /**
+     * Funcion que devuelve un ArrayList de objViajeroAsiento (solo idViajero y
+     * nAsiento) en funcion de un idViaje
+     *
+     * @param idViaje
+     * @return
+     */
+    public ArrayList<ViajeroAsiento> getViajero_Asiento(int idViaje) throws SQLException {
+
+        String ordenSQL = "SELECT * FROM ocupacion WHERE id_viaje = '" + idViaje + "';";
+
+        try {
+            Statement s = Conexion.createStatement();
+            ResultSet res = s.executeQuery(ordenSQL);
+
+            ArrayList<ViajeroAsiento> arrayViajeroAsiento = new ArrayList();
+
+            while (res.next()) {
+
+                int id_viajero = res.getInt("id_viajero");
+                int num_asiento = res.getInt(("num_asiento"));
+
+                ViajeroAsiento objViajeroAsiento = new ViajeroAsiento(id_viajero, num_asiento);
+                arrayViajeroAsiento.add(objViajeroAsiento);
+            }
+
+            return arrayViajeroAsiento;
+
+        } catch (SQLException sqle) {
+            String msjerror = sqle.getMessage();
+            //String codigo.parseInt(sqle.getErrorCode());
+            throw new SQLException(msjerror, "");
+        }
+    }
+
+    /**
+     * Funcionq que devuelve un objViaje apartir de un idHorario
+     *
+     * @param idHorario
+     * @return
+     */
+    public Viaje getViaje(int idHorario) throws SQLException {
+
+        Horario objHorario = this.getHorario(idHorario);
+        String ordenSQL = "SELECT * FROM viaje WHERE id_horario = '" + idHorario + "';";
+
+        try {
+            Statement s = Conexion.createStatement();
+            ResultSet res = s.executeQuery(ordenSQL);
+
+            if (res.next()) {
+
+                int id_viaje = res.getInt("id_viaje");
+                LocalDate fecha = LocalDate.parse(res.getString(("fecha")));
+                int plazas_ocupadas = res.getInt("plazas_ocupadas");
+
+                Viaje objViaje = new Viaje(id_viaje, objHorario, fecha, plazas_ocupadas);
+
+                return objViaje;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException sqle) {
+            String msjerror = sqle.getMessage();
+            //String codigo.parseInt(sqle.getErrorCode());
+            throw new SQLException(msjerror, "");
+        }
     }
 }

@@ -78,9 +78,9 @@
                                             </div>
                                             <% } %>
                                         </div>
-                                        <!--div clas="col-md-2">
-                                            <button type="submit" class="btn btn-primary"> Comprobar y Continuar </button>
-                                        </div-->
+                                        <div clas="col-md-2">
+                                            <button type="submit" class="btn btn-primary" id="comprobar_infoPasajeros" hidden></button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>                         
@@ -89,7 +89,7 @@
                     <div class="col-md-3">
                         <!--form method="post" accept-charset="utf-8" action="servlet_viaje_seleccionado"-->
                             <a href="vista_select_viaje1.jsp" class="btn btn-secondary"> Atrás </a>
-                            <button onclick="document.formularioViajeros.submit();" class="btn btn-primary"> Continuar </button><br><br>
+                            <button onclick="continuar_infoPasajeros();" class="btn btn-primary"> Continuar </button><br><br>
                             <div class="card bg-info border-info">
                                 <div class="card-header text-white text-center">
                                     <h5> Resumen </h5>
@@ -132,12 +132,12 @@
                                         </div>
                                         <div class="card-body">
                                             <p id="hSalida">
-                                                <% out.print("<b> Hora Salida: </b>" + S.getPosiblesViajes().get(0).getHora_salida()); %>
+                                                <% out.print("<b> Hora Salida: </b>" + S.getViajes().get(0).getHorario().getHora_salida()); %>
                                             </p>
                                             <input type="text" name="hSalida" id="input_hSalida" hidden value="">
 
                                             <p id="hLlegada">
-                                                <% out.print("<b> Hora Llegada: </b>" + S.getPosiblesViajes().get(0).getHora_llegada()); %>
+                                                <% out.print("<b> Hora Llegada: </b>" + S.getViajes().get(0).getHorario().getHora_llegada()); %>
                                             </p>
                                             <input type="text" name="hLlegada" id="input_hLlegada" hidden value="">
 
