@@ -81,7 +81,8 @@ public class servlet_viaje_seleccionado extends HttpServlet {
 
                 session.setAttribute("S", S_competo);
                 response.sendRedirect("vista_infoViajeros.jsp");
-            } catch (SQLException sqle) {
+                
+            } catch (AplicationErrorException aex) {
 
             }
         }

@@ -66,7 +66,7 @@
                                             <p class="card-text"> <strong><% out.print(S.getPrecio());%>€ </strong> Billete </p>
                                         </div>
                                         <div class="card-body col-md-2 text-white">
-                                            <a onclick="seleccionHorario('<% out.print(S.getViajes().get(i).getPlazas_ocupadas()); %>', '<% out.print(S.getViajes().get(i).getHorario().getHora_salida()); %>', '<% out.print(S.getViajes().get(i).getHorario().getHora_llegada()); %>','<% out.print(S.getViajes().get(i).getHorario().getId()); %>' , '<% out.print(S.getnBilletes()); %>', '<% out.print(S.getPrecio()); %>')" class="btn btn-primary"> Seleccionar </a>
+                                            <a id="btnSelect<% out.print(S.getViajes().get(i).getHorario().getId()); %>" onclick="seleccionHorario('<% out.print(S.getViajes().get(i).getPlazas_ocupadas()); %>', '<% out.print(S.getViajes().get(i).getHorario().getHora_salida()); %>', '<% out.print(S.getViajes().get(i).getHorario().getHora_llegada()); %>','<% out.print(S.getViajes().get(i).getHorario().getId()); %>' , '<% out.print(S.getnBilletes()); %>', '<% out.print(S.getPrecio()); %>')" class="btn btn-primary"> Seleccionar </a>
                                         </div>
                                     </div>
                                     <div class="card-footer text-muted">

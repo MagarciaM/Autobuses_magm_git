@@ -61,6 +61,10 @@ function seleccionHorario(plazasOcupadas, hSalida, hLlegada, idHorario, nBillete
 
     $('#calculo').append("<div> " + precio + "€ x " + nBilletes + " Billetes = " + (nBilletes * precio) + "€ </div>");
     $('#precioTotal').append("<div> Precio Total " + (nBilletes * precio) + "€ </div>");
+    
+    //Cambiamos los botones para que se vea que viaje se ha selecionado
+    
+    $('#btnSelect1').attr("disabled");
 }
 
 function pasarPasajero(nViajeros) {

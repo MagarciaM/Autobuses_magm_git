@@ -50,7 +50,7 @@ public class servlet_ajaxDestino extends HttpServlet {
                 out.print("<option value='"+arrayEstaciones_destino.get(i).getId()+"'> "+arrayEstaciones_destino.get(i).getLocalidad()+" </option>");
             }
             
-        } catch (SQLException sqle) {
+        } catch (AplicationErrorException aex) {
             
         }
     }

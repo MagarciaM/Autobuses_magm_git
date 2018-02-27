@@ -78,7 +78,7 @@ public class servlet_infoViajeros extends HttpServlet {
                 
                 S.getViajes().get(0).setViajeros(arrayViajeros);
                 
-            } catch (SQLException sqle) {
+            } catch (AplicationErrorException aex) {
                 
             }
             

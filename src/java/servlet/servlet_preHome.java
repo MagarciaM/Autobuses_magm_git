@@ -49,7 +49,8 @@ public class servlet_preHome extends HttpServlet {
             session.setAttribute("objEmpresa", objEmpresa);
             response.sendRedirect("vista_home.jsp");
             
-        } catch (SQLException sqle){
+        } catch (AplicationErrorException aex) {
+            
         }
             
     }

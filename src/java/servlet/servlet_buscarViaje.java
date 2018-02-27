@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 public class servlet_buscarViaje extends HttpServlet {
 
     private Connection Conexion;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,64 +39,51 @@ public class servlet_buscarViaje extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            // Recogemos los parametros del formulario inicial
-            int id_origen = Integer.parseInt(request.getParameter("origen"));
-            int id_destino = Integer.parseInt(request.getParameter("destino"));
-            LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
-            int nBilletes = Integer.parseInt(request.getParameter("billetes"));
-            
-            // obtenemos la el obj ruta a partir de su origen y destino
-            Ruta R = new Operaciones(Conexion).getRuta(id_origen, id_destino);
-            
-            // Obtenemos los objetos completos de estacion a partir de sus id
-            Estacion E1 = new Operaciones(Conexion).getEstacion(id_destino);
-            Estacion E2 = new Operaciones(Conexion).getEstacion(id_origen);
-            
-            // obtenemos los horarios que corresponden con esa ruta
-            ArrayList<Horario> arrayHorarios = new Operaciones(Conexion).getHorarios(R);
-            
+
             try {
+
+                // Recogemos los parametros del formulario inicial
+                int id_origen = Integer.parseInt(request.getParameter("origen"));
+                int id_destino = Integer.parseInt(request.getParameter("destino"));
+                LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
+                int nBilletes = Integer.parseInt(request.getParameter("billetes"));
+
+                // obtenemos la el obj ruta a partir de su origen y destino
+                Ruta R = new Operaciones(Conexion).getRuta(id_origen, id_destino);
+
+                // Obtenemos los objetos completos de estacion a partir de sus id
+                Estacion E1 = new Operaciones(Conexion).getEstacion(id_destino);
+                Estacion E2 = new Operaciones(Conexion).getEstacion(id_origen);
+
+                // obtenemos los horarios que corresponden con esa ruta
+                ArrayList<Horario> arrayHorarios = new Operaciones(Conexion).getHorarios(R);
+
                 // obtenemos los viajes que corresponden con los horarios y la fecha indicada
                 ArrayList<Viaje> arrayViajes = new Operaciones(Conexion).getViajes(arrayHorarios, fecha);
-                
+
                 // Recuperamos el ArrayList de Viajes que nos devuelve desde Operaciones y lo añadimos al obj Selecionado
                 // Contruimos el obj Selecionado
                 Seleccionado S = new Seleccionado(E1, E2, fecha, R.getPrecio(), R.getDistancia(), nBilletes, arrayViajes);
 
-                /*HttpSession session = request.getSession(true);
-                session.setAttribute("seleccionado",S);
-            
-                response.sendRedirect("vista_select_viaje1.jsp");*/
-                
-                out.print(S);
-                
-            } catch (AplicationErrorException aex) {
-                
                 HttpSession session = request.getSession(true);
-                session.setAttribute("aex",aex);
-                out.print(aex);
-            
-                //response.sendRedirect("vista_error.jsp");
-            }
-            
-            // Contruimos un ArrayList de obj PosibleViaje y se lo añadimos al obj Selecionado
-            /*ArrayList<PosibleViaje> array_posiblesViajes = new ArrayList();
-            for (int i=0 ; i<arrayHorarios.size() ; i++) {           
-                PosibleViaje Pv = new PosibleViaje(arrayHorarios.get(i).getHora_salida(), arrayHorarios.get(i).getHora_llegada(), arrayViajes.get(i).getPlazas_ocupadas());
-                array_posiblesViajes.add(Pv);
-                
-            }*/
-            
+                session.setAttribute("seleccionado", S);
 
-        } catch (SQLException sqle) {
-            
+                response.sendRedirect("vista_select_viaje1.jsp");
+
+            } catch (AplicationErrorException aex) {
+
+                HttpSession session = request.getSession(true);
+                session.setAttribute("aex", aex);
+
+                response.sendRedirect("vista_error.jsp");
+            }
         }
     }
 
     @Override
     public void init() throws ServletException {
         //super.init(); //To change body of generated methods, choose Tools | Templates.
-        
+
         /* Establecemos la conexión, si no existe */
         try {
             ConexionBBDD ConexBD = ConexionBBDD.GetConexion();
@@ -104,8 +92,6 @@ public class servlet_buscarViaje extends HttpServlet {
         } catch (SQLException sqle) {
         }
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

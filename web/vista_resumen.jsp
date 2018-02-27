@@ -116,9 +116,11 @@
                         </li>
                     </ul>
                 </div><br>
-                <div class="col-md-6 offset-md-5">
-                    <a href="vista_selecAsientos.jsp" class="btn btn-secondary"> Atrás </a>
-                    <a href="vista_registroLogin_cliente.jsp" class="btn btn-primary"> Continuar </a><br><br>
+                <div class="col-md-6 offset-md-4">
+                    <div class="offset-md-2">
+                    <a href="vista_selecAsientos.jsp" class="btn btn-secondary col-md-2"> Atrás </a>
+                    <a href="vista_registroLogin_cliente.jsp" class="btn btn-primary col-md-3"> Continuar </a><br><br>
+                    </div>
                 </div>
             </div>
         </div>

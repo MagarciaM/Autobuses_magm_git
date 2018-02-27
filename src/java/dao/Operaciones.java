@@ -34,9 +34,9 @@ public class Operaciones {
      * estaciones
      *
      * @return Devuelve un ArrayList de objetos estacion
-     * @throws SQLException
+     * @throws modelo.AplicationErrorException
      */
-    public ArrayList<Estacion> getEstaciones() throws SQLException {
+    public ArrayList<Estacion> getEstaciones() throws AplicationErrorException {
 
         ArrayList<Estacion> arrayEstacion = new ArrayList();
         String ordenSQL = "SELECT * FROM estacion";
@@ -58,8 +58,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error getEstaciones()");
         }
         return arrayEstacion;
     }
@@ -72,7 +72,7 @@ public class Operaciones {
      * @return El método devuelve un objeto Estacion con todos sus valores
      * @throws SQLException
      */
-    public int getId_estacion(String localidad) throws SQLException {
+    public int getId_estacion(String localidad) throws AplicationErrorException {
 
         String ordenSQL = "SELECT id_estacion FROM estacion WHERE localidad='" + localidad + "';";
 
@@ -90,8 +90,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error getEstaciones()");
         }
     }
 
@@ -105,7 +105,7 @@ public class Operaciones {
      * @return El método devuelve un ArayList de objetos Estacion, que contiene
      * @throws SQLException
      */
-    public ArrayList<Estacion> getEstaciones_destino(int id_estacion_origen) throws SQLException {
+    public ArrayList<Estacion> getEstaciones_destino(int id_estacion_origen) throws AplicationErrorException {
 
         ArrayList<Estacion> arrayEstacion_destino = new ArrayList();
 
@@ -127,8 +127,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error consulta getEstaciones_destino");
         }
     }
 
@@ -141,7 +141,7 @@ public class Operaciones {
      * @return El método devuelve un objeto Estación completo
      * @throws SQLException
      */
-    public Estacion getEstacion(int id_estacion) throws SQLException {
+    public Estacion getEstacion(int id_estacion) throws AplicationErrorException {
 
         String ordenSQL = "SELECT * FROM estacion WHERE id_estacion='" + id_estacion + "';";
 
@@ -163,8 +163,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error consulta datos de estación Estaciones");
         }
     }
 
@@ -176,7 +176,7 @@ public class Operaciones {
      * @return El método devuelve un objeto Estación completo
      * @throws SQLException
      */
-    public Estacion getEstacion(String localidad) throws SQLException {
+    public Estacion getEstacion(String localidad) throws AplicationErrorException {
 
         String ordenSQL = "SELECT * FROM estacion WHERE localidad='" + localidad + "';";
 
@@ -198,8 +198,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error getEstacion()");
         }
     }
 
@@ -209,7 +209,7 @@ public class Operaciones {
      * @return El método devuelve un objeto Empresa completo
      * @throws SQLException
      */
-    public Empresa getDatos_empresa() throws SQLException {
+    public Empresa getDatos_empresa() throws AplicationErrorException {
 
         String ordenSQL = "SELECT * FROM datos_empresa";
 
@@ -234,8 +234,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error consulta datos de la empresa");
         }
     }
 
@@ -250,7 +250,7 @@ public class Operaciones {
      * @return
      * @throws SQLException
      */
-    public Ruta getRuta(int id_estacion_origen, int id_estacion_destino) throws SQLException {
+    public Ruta getRuta(int id_estacion_origen, int id_estacion_destino) throws AplicationErrorException {
 
         String ordenSQL = "SELECT * FROM ruta WHERE id_estacion_origen='" + id_estacion_origen + "' AND id_estacion_destino='" + id_estacion_destino + "'";
 
@@ -272,8 +272,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error consulta de ruta");
         }
     }
 
@@ -283,8 +283,9 @@ public class Operaciones {
      * horarios que corresponden con el id de la misma
      * @return ArrayList<Horario> devolvemos un ArrayList con los horarios que
      * corresponden a esa ruta
+     * @throws modelo.AplicationErrorException Exception propia de para recoger los errores de la aplicación
      */
-    public ArrayList<Horario> getHorarios(Ruta R) throws SQLException {
+    public ArrayList<Horario> getHorarios(Ruta R) throws AplicationErrorException {
 
         ArrayList<Horario> arrayHorarios = new ArrayList();
         String ordenSQL = "SELECT * FROM horario WHERE id_ruta = '" + R.getId() + "';";
@@ -308,8 +309,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error consulta de horarios");
         }
     }
 
@@ -348,7 +349,7 @@ public class Operaciones {
             } catch (SQLException sqle) {
                 String msjerror = sqle.getMessage();
                 int codigo = sqle.getErrorCode();
-                throw new AplicationErrorException(msjerror, codigo, "Error consulta de viajes");
+                throw new AplicationErrorException(msjerror, codigo, "Error getViajes");
             }
         }
         
@@ -360,7 +361,7 @@ public class Operaciones {
         }
     }
 
-    public int get_idViajero(String dni) throws SQLException {
+    public int get_idViajero(String dni) throws AplicationErrorException {
         String ordenSQL = "SELECT id_viajero FROM viajero WHERE nif='" + dni + "';";
 
         try {
@@ -377,12 +378,12 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error get_idViajero()");
         }
     }
 
-    public Horario getHorario(int idHorario) throws SQLException {
+    public Horario getHorario(int idHorario) throws AplicationErrorException {
 
         String ordenSQL = "SELECT * FROM horario WHERE id_horario = '" + idHorario + "';";
 
@@ -405,8 +406,8 @@ public class Operaciones {
             }
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error getHorario()");
         }
     }
 
@@ -417,7 +418,7 @@ public class Operaciones {
      * @param idViaje
      * @return
      */
-    public ArrayList<ViajeroAsiento> getViajero_Asiento(int idViaje) throws SQLException {
+    public ArrayList<ViajeroAsiento> getViajero_Asiento(int idViaje) throws AplicationErrorException {
 
         String ordenSQL = "SELECT * FROM ocupacion WHERE id_viaje = '" + idViaje + "';";
 
@@ -440,8 +441,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error getViajero_Asiento()");
         }
     }
 
@@ -451,7 +452,7 @@ public class Operaciones {
      * @param idHorario
      * @return
      */
-    public Viaje getViaje(int idHorario) throws SQLException {
+    public Viaje getViaje(int idHorario) throws AplicationErrorException {
 
         Horario objHorario = this.getHorario(idHorario);
         String ordenSQL = "SELECT * FROM viaje WHERE id_horario = '" + idHorario + "';";
@@ -475,8 +476,8 @@ public class Operaciones {
 
         } catch (SQLException sqle) {
             String msjerror = sqle.getMessage();
-            //String codigo.parseInt(sqle.getErrorCode());
-            throw new SQLException(msjerror, "");
+            int codigo = sqle.getErrorCode();
+            throw new AplicationErrorException(msjerror, codigo, "Error getViaje()");
         }
     }
 }

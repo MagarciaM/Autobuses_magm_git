@@ -60,9 +60,9 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <div class="col-md-11 offset-md-1">
-                                        <button class="btn col-md-4"> Atras </button>
-                                        <button class="btn btn-primary col-md-6"> Acceder </button>
+                                    <div class="col-md-11 offset-md-3">
+                                        <a href="vista_resumen.jsp" class="btn btn-secondary col-md-2"> Atrás </a>
+                                        <button class="btn btn-primary col-md-3"> Acceder </button>
                                     </div>
                                 </form>
                             </div>
@@ -106,9 +106,9 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <div class="col-md-11 offset-md-1">
-                                        <button class="btn col-md-4"> Atras </button>
-                                        <button class="btn btn-primary col-md-6"> Registrar </button>
+                                    <div class="col-md-11 offset-md-4">
+                                        <a href="vista_resumen.jsp" class="btn btn-secondary col-md-2"> Atrás </a>
+                                        <button class="btn btn-primary col-md-3"> Registrar </button>
                                     </div>
                                 </form>
                             </div>
