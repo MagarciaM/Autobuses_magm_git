@@ -11,5 +11,6 @@
     </head>
     <body>
         <% response.sendRedirect("servlet_preHome"); %>
+        <!-- Comentario para ver cambios en Git -->
     </body>
 </html>

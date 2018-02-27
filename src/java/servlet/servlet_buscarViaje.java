@@ -54,8 +54,29 @@ public class servlet_buscarViaje extends HttpServlet {
             // obtenemos los horarios que corresponden con esa ruta
             ArrayList<Horario> arrayHorarios = new Operaciones(Conexion).getHorarios(R);
             
-            // obtenemos los viajes que corresponden con los horarios y la fecha indicada
-            ArrayList<Viaje> arrayViajes = new Operaciones(Conexion).getViajes(arrayHorarios, fecha);
+            try {
+                // obtenemos los viajes que corresponden con los horarios y la fecha indicada
+                ArrayList<Viaje> arrayViajes = new Operaciones(Conexion).getViajes(arrayHorarios, fecha);
+                
+                // Recuperamos el ArrayList de Viajes que nos devuelve desde Operaciones y lo añadimos al obj Selecionado
+                // Contruimos el obj Selecionado
+                Seleccionado S = new Seleccionado(E1, E2, fecha, R.getPrecio(), R.getDistancia(), nBilletes, arrayViajes);
+
+                /*HttpSession session = request.getSession(true);
+                session.setAttribute("seleccionado",S);
+            
+                response.sendRedirect("vista_select_viaje1.jsp");*/
+                
+                out.print(S);
+                
+            } catch (AplicationErrorException aex) {
+                
+                HttpSession session = request.getSession(true);
+                session.setAttribute("aex",aex);
+                out.print(aex);
+            
+                //response.sendRedirect("vista_error.jsp");
+            }
             
             // Contruimos un ArrayList de obj PosibleViaje y se lo añadimos al obj Selecionado
             /*ArrayList<PosibleViaje> array_posiblesViajes = new ArrayList();
@@ -65,14 +86,7 @@ public class servlet_buscarViaje extends HttpServlet {
                 
             }*/
             
-            // Recuperamos el ArrayList de Viajes que nos devuelve desde Operaciones y lo añadimos al obj Selecionado
-            // Contruimos el obj Selecionado
-            Seleccionado S = new Seleccionado(E1, E2, fecha, R.getPrecio(), R.getDistancia(), nBilletes, arrayViajes);
 
-            HttpSession session = request.getSession(true);
-            session.setAttribute("seleccionado",S);
-            
-            response.sendRedirect("vista_select_viaje1.jsp");
         } catch (SQLException sqle) {
             
         }

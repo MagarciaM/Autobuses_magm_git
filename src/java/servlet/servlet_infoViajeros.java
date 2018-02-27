@@ -100,14 +100,6 @@ public class servlet_infoViajeros extends HttpServlet {
             session.setAttribute("arrayViajerosNuevos", array_ViajerosNuevos);
             session.setAttribute("array_plazasLibres", array_plazasLibres);
             response.sendRedirect("vista_selecAsientos.jsp");
-            
-            /*out.print(objBillete);
-            out.print("<br>///<br>");
-            out.print(array_ViajerosNuevos);
-            out.print("<br>///<br>");
-            out.print(array_plazasOcupadas);
-            out.print("<br>///<br>");
-            out.print(array_plazasLibres);*/
         }
     }
 

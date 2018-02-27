@@ -320,8 +320,9 @@ public class Operaciones {
      * @param arrayHorarios ArrayList de horarios
      * @param fecha Parámetro fecha a partir de la cual se buscan los viajes
      * @return EL método devuelve un array de objetos viaje
+     * @throws modelo.AplicationErrorException Clase para recoger las excepciones propias de la aplicación
      */
-    public ArrayList<Viaje> getViajes(ArrayList<Horario> arrayHorarios, LocalDate fecha) throws SQLException {
+    public ArrayList<Viaje> getViajes(ArrayList<Horario> arrayHorarios, LocalDate fecha) throws AplicationErrorException {
 
         ArrayList<Viaje> arrayViajes = new ArrayList();
 
@@ -346,12 +347,17 @@ public class Operaciones {
 
             } catch (SQLException sqle) {
                 String msjerror = sqle.getMessage();
-                //String codigo.parseInt(sqle.getErrorCode());
-                throw new SQLException(msjerror, "");
+                int codigo = sqle.getErrorCode();
+                throw new AplicationErrorException(msjerror, codigo, "Error consulta de viajes");
             }
         }
-
-        return arrayViajes;
+        
+        // Si el array de viajes esta vacio sacamos la Exception
+        if (arrayViajes.size() > 1) {
+            return arrayViajes;
+        } else {
+            throw new AplicationErrorException("", 0, "No se ha encontrado ningun viaje para los parámetros introducidos.");
+        }
     }
 
     public int get_idViajero(String dni) throws SQLException {

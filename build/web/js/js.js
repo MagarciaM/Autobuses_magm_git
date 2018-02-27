@@ -76,3 +76,8 @@ function continuar_infoPasajeros() {
     
     $('#comprobar_infoPasajeros').click();
 }
+
+function continuar_selecAsientos () {
+
+    $('#comprobar_selecAsientos').click();
+}

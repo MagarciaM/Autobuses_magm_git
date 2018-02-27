@@ -50,19 +50,19 @@
                                             Indica el numero de asiento de cada pasajero
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form name="formularioAsientos" class="row" method="post" accept-charset="utf-8" action="servlet_asientos">
                                                 <div class="form-group row">
-                                                    <% for (int i = 1; i <= objBillete.getObjSeleccionado().getnBilletes(); i++) {%>
-                                                    
-                                                    <% 
-                                                        String nombre = arrayViajerosNuevos.get(i-1).getNombre();
+                                                    <% for (int i = 0; i < objBillete.getObjSeleccionado().getnBilletes(); i++) {%>
+
+                                                    <%
+                                                        String nombre = arrayViajerosNuevos.get(i ).getNombre();
                                                     %>
-                                                    
+
                                                     <label id="nombrePasajero<% out.print(i); %>" class="col-sm-8 col-form-label"><p><% out.print(nombre); %> </p></label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-control" id="selectViajero<% out.print(i); %>">
-                                                            <% for (int j=0; j < array_plazasLibres.size() ; j++) {%>
-                                                            
+                                                        <select class="form-control" id="selectViajero<% out.print(i); %>" name="asiento<% out.print(i); %>">
+                                                            <% for (int j = 0; j < array_plazasLibres.size(); j++) {%>
+
                                                             <option value="<% out.print(array_plazasLibres.get(j)); %>"> Nº<% out.print(array_plazasLibres.get(j)); %> </option>
                                                             <% } %>
                                                         </select>
@@ -70,6 +70,7 @@
                                                     <br>
                                                     <% } %>
                                                 </div>
+                                                <button type="submit" class="btn btn-primary" id="comprobar_selecAsientos" hidden></button>
                                             </form>
                                         </div>
                                     </div>
@@ -79,75 +80,75 @@
                     </div>
                     <div class="col-md-3">
                         <!--form method="post" accept-charset="utf-8" action="servlet_viaje_seleccionado"-->
-                            <a href="vista_infoViajeros.jsp" class="btn btn-secondary"> Atrás </a>
-                            <button type="submit" class="btn btn-primary"> Continuar </button><br><br>
-                            <div class="card bg-info border-info">
-                                <div class="card-header text-white text-center">
-                                    <h5> Resumen </h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <div class="card-header text-center border-info">
-                                            <h6> Tu busqueda </h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <p>
-                                                <b> Origen: </b>
-                                                <% out.print(objBillete.getObjSeleccionado().getEstacionOrigen().getLocalidad()); %>
-                                                <input type="text" name="origen" hidden value="<% out.print(objBillete.getObjSeleccionado().getEstacionOrigen().getLocalidad()); %>">
-                                            </p>
-
-                                            <p>
-                                                <b> Destino: </b>
-                                                <% out.print(objBillete.getObjSeleccionado().getEstacionDestino().getLocalidad()); %>
-                                                <input type="text" name="destino" hidden value="<% out.print(objBillete.getObjSeleccionado().getEstacionDestino().getLocalidad()); %>">
-                                            </p>
-
-                                            <p>
-                                                <b> Fecha: </b>
-                                                <% out.print(objBillete.getObjSeleccionado().getFecha());%>
-                                                <input type="text" name="fecha" hidden value="<% out.print(objBillete.getObjSeleccionado().getFecha());%>">
-                                            </p>
-
-                                            <p>
-                                                <b> Nº Billetes: </b>
-                                                <% out.print(objBillete.getObjSeleccionado().getnBilletes());%>
-                                                <input type="text" name="nBilletes" hidden value="<% out.print(objBillete.getObjSeleccionado().getnBilletes());%>">
-                                                <input type="text" name="distancia" hidden value="<% out.print(objBillete.getObjSeleccionado().getDistancia());%>">
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="card-header text-center border-info">
-                                            <h6> Horario Seleccionado </h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <p id="hSalida">
-                                                <% out.print("<b> Hora Salida: </b>" + objBillete.getObjSeleccionado().getViajes().get(0).getHorario().getHora_salida()); %>
-                                            </p>
-                                            <input type="text" name="hSalida" id="input_hSalida" hidden value="">
-
-                                            <p id="hLlegada">
-                                                <% out.print("<b> Hora Llegada: </b>" + objBillete.getObjSeleccionado().getViajes().get(0).getHorario().getHora_llegada()); %>
-                                            </p>
-                                            <input type="text" name="hLlegada" id="input_hLlegada" hidden value="">
-
-                                            <input type="text" name="plazasOcupadas" id="input_plazasOcupadas" hidden value="">
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item bg-info text-white text-center">
-                                        <p id="calculo">
-                                            <% out.print(objBillete.getObjSeleccionado().getPrecio() + " x " + objBillete.getObjSeleccionado().getnBilletes() + " Billetes = " + objBillete.getObjSeleccionado().getPrecio()*objBillete.getObjSeleccionado().getnBilletes() + "€"); %>
-                                        </p>
-                                        <h4 id="precioTotal"> 
-                                            <div>
-                                                <% out.print("Precio Total " + objBillete.getObjSeleccionado().getPrecio()*objBillete.getObjSeleccionado().getnBilletes() + "€"); %>                   
-                                            </div>                                            
-                                        </h4>
-                                        <input type="number" name="precio" id="input_precio" hidden value="">
-                                    </li>
-                                </ul>
+                        <a href="vista_infoViajeros.jsp" class="btn btn-secondary"> Atrás </a>
+                        <button onclick="continuar_selecAsientos();" class="btn btn-primary"> Continuar </button><br><br>
+                        <div class="card bg-info border-info">
+                            <div class="card-header text-white text-center">
+                                <h5> Resumen </h5>
                             </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="card-header text-center border-info">
+                                        <h6> Tu busqueda </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>
+                                            <b> Origen: </b>
+                                            <% out.print(objBillete.getObjSeleccionado().getEstacionOrigen().getLocalidad()); %>
+                                            <input type="text" name="origen" hidden value="<% out.print(objBillete.getObjSeleccionado().getEstacionOrigen().getLocalidad()); %>">
+                                        </p>
+
+                                        <p>
+                                            <b> Destino: </b>
+                                            <% out.print(objBillete.getObjSeleccionado().getEstacionDestino().getLocalidad()); %>
+                                            <input type="text" name="destino" hidden value="<% out.print(objBillete.getObjSeleccionado().getEstacionDestino().getLocalidad()); %>">
+                                        </p>
+
+                                        <p>
+                                            <b> Fecha: </b>
+                                            <% out.print(objBillete.getObjSeleccionado().getFecha());%>
+                                            <input type="text" name="fecha" hidden value="<% out.print(objBillete.getObjSeleccionado().getFecha());%>">
+                                        </p>
+
+                                        <p>
+                                            <b> Nº Billetes: </b>
+                                            <% out.print(objBillete.getObjSeleccionado().getnBilletes());%>
+                                            <input type="text" name="nBilletes" hidden value="<% out.print(objBillete.getObjSeleccionado().getnBilletes());%>">
+                                            <input type="text" name="distancia" hidden value="<% out.print(objBillete.getObjSeleccionado().getDistancia());%>">
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="card-header text-center border-info">
+                                        <h6> Horario Seleccionado </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p id="hSalida">
+                                            <% out.print("<b> Hora Salida: </b>" + objBillete.getObjSeleccionado().getViajes().get(0).getHorario().getHora_salida()); %>
+                                        </p>
+                                        <input type="text" name="hSalida" id="input_hSalida" hidden value="">
+
+                                        <p id="hLlegada">
+                                            <% out.print("<b> Hora Llegada: </b>" + objBillete.getObjSeleccionado().getViajes().get(0).getHorario().getHora_llegada()); %>
+                                        </p>
+                                        <input type="text" name="hLlegada" id="input_hLlegada" hidden value="">
+
+                                        <input type="text" name="plazasOcupadas" id="input_plazasOcupadas" hidden value="">
+                                    </div>
+                                </li>
+                                <li class="list-group-item bg-info text-white text-center">
+                                    <p id="calculo">
+                                        <% out.print(objBillete.getObjSeleccionado().getPrecio() + " x " + objBillete.getObjSeleccionado().getnBilletes() + " Billetes = " + objBillete.getObjSeleccionado().getPrecio() * objBillete.getObjSeleccionado().getnBilletes() + "€"); %>
+                                    </p>
+                                    <h4 id="precioTotal"> 
+                                        <div>
+                                            <% out.print("Precio Total " + objBillete.getObjSeleccionado().getPrecio() * objBillete.getObjSeleccionado().getnBilletes() + "€");%>                   
+                                        </div>                                            
+                                    </h4>
+                                    <input type="number" name="precio" id="input_precio" hidden value="">
+                                </li>
+                            </ul>
+                        </div>
                         <!--/form-->
                     </div>
                 </div>

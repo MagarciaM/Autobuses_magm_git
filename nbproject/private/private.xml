@@ -3,23 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/PosibleViaje.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/Ruta.java</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/vista_select_viaje1.jsp</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/Horario.java</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/Viaje.java</file>
-            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/index.jsp</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/servlet/servlet_viaje_seleccionado.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/index.jsp</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/vista_selecAsientos.jsp</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/servlet/servlet_infoViajeros.java</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/Billete.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/vista_registroLogin_cliente.jsp</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/servlet/servlet_buscarViaje.java</file>
-            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/Estacion.java</file>
-            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/servlet/servlet_preHome.java</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/ViajeroAsiento.java</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/servlet/servlet_preHome.java</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/Viajero.java</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/vista_infoViajeros.jsp</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/vista_home.jsp</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/web/vista_resumen.jsp</file>
+            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/Notas</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/modelo/Seleccionado.java</file>
-            <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/dao/ConexionBBDD.java</file>
             <file>file:/C:/Users/migue/Dropbox/2DAW/Servidor/Java/Proyectos%20Web%20Java%202ºDAW/Autobuses_magm_git/src/java/dao/Operaciones.java</file>
         </group>
     </open-files>
