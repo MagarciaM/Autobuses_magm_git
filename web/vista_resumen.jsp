@@ -27,7 +27,7 @@
         <div class="contenido">
             <div class="container-fluid">
                 <div class="col-md-12">
-                    <h1> <% out.print(objEmpresa.getNombre());%> </h1>
+                    <img src="./img/logo1.svg" width="300" style="margin: 10px;">
                 </div>
                 <div class="card bg-info border-info col-md-6 offset-md-3">
                     <div class="card-header text-white text-center">
@@ -97,7 +97,7 @@
                                     <% out.print(objBillete.getObjSeleccionado().getViajes().get(0).getHorario().getHora_salida()); %>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <b> Hora Llegada: </b>
                                     <% out.print(objBillete.getObjSeleccionado().getViajes().get(0).getHorario().getHora_llegada()); %>
                                 </div>

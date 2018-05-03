@@ -70,7 +70,7 @@ public class servlet_viaje_seleccionado extends HttpServlet {
 
                 Horario objHorario = new Operaciones(Conexion).getHorario(idHorario);
 
-                Viaje objViaje = new Operaciones(Conexion).getViaje(objHorario.getId());
+                Viaje objViaje = new Operaciones(Conexion).getViaje(objHorario.getId(), fecha);
 
                 ArrayList<Viaje> array_Viajes = new ArrayList();
                 array_Viajes.add(objViaje);

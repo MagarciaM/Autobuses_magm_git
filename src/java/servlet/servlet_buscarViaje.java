@@ -46,7 +46,6 @@ public class servlet_buscarViaje extends HttpServlet {
                 int id_origen = Integer.parseInt(request.getParameter("origen"));
                 int id_destino = Integer.parseInt(request.getParameter("destino"));
                 LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
-                int nBilletes = Integer.parseInt(request.getParameter("billetes"));
 
                 // obtenemos la el obj ruta a partir de su origen y destino
                 Ruta R = new Operaciones(Conexion).getRuta(id_origen, id_destino);
@@ -58,22 +57,45 @@ public class servlet_buscarViaje extends HttpServlet {
                 // obtenemos los horarios que corresponden con esa ruta
                 ArrayList<Horario> arrayHorarios = new Operaciones(Conexion).getHorarios(R);
 
-                // obtenemos los viajes que corresponden con los horarios y la fecha indicada
-                ArrayList<Viaje> arrayViajes = new Operaciones(Conexion).getViajes(arrayHorarios, fecha);
-
-                // Recuperamos el ArrayList de Viajes que nos devuelve desde Operaciones y lo añadimos al obj Selecionado
-                // Contruimos el obj Selecionado
-                Seleccionado S = new Seleccionado(E1, E2, fecha, R.getPrecio(), R.getDistancia(), nBilletes, arrayViajes);
-
+                // Recuperamos de la session la variable para diferenciar si venimos desde el menu para hacer backup o para reservar viaje
                 HttpSession session = request.getSession(true);
-                session.setAttribute("seleccionado", S);
+                String option = (String) session.getAttribute("option");
 
-                response.sendRedirect("vista_select_viaje1.jsp");
+                if (option.equals("reservar")) {
+
+                    int nBilletes = Integer.parseInt(request.getParameter("billetes"));
+
+                    // obtenemos los viajes que corresponden con los horarios y la fecha indicada
+                    ArrayList<Viaje> arrayViajes = new Operaciones(Conexion).getViajes(arrayHorarios, fecha, nBilletes);
+
+                    // Recuperamos el ArrayList de Viajes que nos devuelve desde Operaciones y lo añadimos al obj Selecionado
+                    // Contruimos el obj Selecionado
+                    Seleccionado S = new Seleccionado(E2, E1, fecha, R.getPrecio(), R.getDistancia(), nBilletes, arrayViajes);
+
+                    // Subimos a session 
+                    session.setAttribute("seleccionado", S);
+
+                    response.sendRedirect("vista_select_viaje1.jsp");
+
+                } else {
+                    
+                    // obtenemos los viajes que corresponden con los horarios y la fecha indicada
+                    ArrayList<Viaje> arrayViajes = new Operaciones(Conexion).getViajes(arrayHorarios, fecha, 0);
+
+                    // Recuperamos el ArrayList de Viajes que nos devuelve desde Operaciones y lo añadimos al obj Selecionado
+                    // Contruimos el obj Selecionado
+                    Seleccionado S = new Seleccionado(E1, E2, fecha, R.getPrecio(), R.getDistancia(), 0, arrayViajes);
+                    
+                    // Subimos a session 
+                    session.setAttribute("seleccionado", S);
+                    
+                    response.sendRedirect("vista_select_viajeBackup.jsp");
+                }
 
             } catch (AplicationErrorException aex) {
 
                 HttpSession session = request.getSession(true);
-                session.setAttribute("aex", aex);
+                session.setAttribute("msj", aex.getCadena());
 
                 response.sendRedirect("vista_error.jsp");
             }

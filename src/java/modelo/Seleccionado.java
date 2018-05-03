@@ -24,7 +24,17 @@ public class Seleccionado {
     private int distancia;
     private int nBilletes;
     ArrayList<Viaje> Viajes;
-
+    
+    /**
+     * Contructor 
+     * @param estacionOrigen objeto de la clase Estacion, que nos indica la estación de origen
+     * @param estacionDestino objeto de la clase Estacion, que nos indica la estación de destino
+     * @param fecha LocalDate, nos indica la fecha selecionada
+     * @param precio float, nos indica el precio
+     * @param distancia int, nos indica la distancia
+     * @param nBilletes int, nos indica el número de billetes que ha selecionado el usuario
+     * @param Viajes ArrayList de objetos de la clase Viaje
+     */
     public Seleccionado(Estacion estacionOrigen, Estacion estacionDestino, LocalDate fecha, float precio, int distancia, int nBilletes, ArrayList<Viaje> Viajes) {
         this.estacionOrigen = estacionOrigen;
         this.estacionDestino = estacionDestino;

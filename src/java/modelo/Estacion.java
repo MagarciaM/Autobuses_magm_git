@@ -11,7 +11,6 @@ package modelo;
  */
 public class Estacion {
     
-    // Variables
     private int id;
     private String localidad;
     private String direccion;
@@ -20,9 +19,9 @@ public class Estacion {
     /**
      * Contructor de la clase Estacion con todos lo parametos que corresponden a la tabla
      * @param id El parámetro id corresponde al id de la tabla estacion
-     * @param localidad El parámetro localidad indica el nombre de la localidad de la estación
-     * @param direccion El parámetro direccion indica la dirección donde se encuentra la estacion
-     * @param nombre El parámetro nombre indica el nombre de la estacion
+     * @param localidad String, indica el nombre de la localidad de la estación
+     * @param direccion String indica la dirección donde se encuentra la estacion
+     * @param nombre String, indica el nombre de la estacion 
      */
     public Estacion(int id, String localidad, String direccion, String nombre) {
         this.id = id;
@@ -32,9 +31,9 @@ public class Estacion {
     }
     /**
      * Contructor de la clase Estacion sin parámetro id
-     * @param localidad El parámetro localidad indica el nombre de la localidad de la estación
-     * @param direccion El parámetro direccion indica la dirección donde se encuentra la estacion
-     * @param nombre El parámetro nombre indica el nombre de la estacion 
+     * @param localidad String, indica el nombre de la localidad de la estación
+     * @param direccion String indica la dirección donde se encuentra la estacion
+     * @param nombre String, indica el nombre de la estacion 
      */
     public Estacion(String localidad, String direccion, String nombre) {
         this.localidad = localidad;
@@ -42,7 +41,6 @@ public class Estacion {
         this.nombre = nombre;
     }
     
-    // Set y Get
     public void setId(int id) {
         this.id = id;
     }
@@ -74,8 +72,6 @@ public class Estacion {
     public String getNombre() {
         return nombre;
     }
-    
-    //toString
 
     @Override
     public String toString() {

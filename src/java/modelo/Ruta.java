@@ -20,11 +20,11 @@ public class Ruta {
     
     /**
      * Contructor de la clase Ruta con todos los parametros
-     * @param id
-     * @param id_estacion_origen
-     * @param id_estacion_destino
-     * @param distancia
-     * @param precio 
+     * @param id int, nos indica el id que tiene la ruta dentro de la base de datos
+     * @param id_estacion_origen int, nos indica el id que tiene la estacion de origen
+     * @param id_estacion_destino int, nos indica el id que tiene la estacion de destino
+     * @param distancia int, nos indica la distancia 
+     * @param precio float, nos indica el precio
      */
     public Ruta(int id, int id_estacion_origen, int id_estacion_destino, int distancia, float precio) {
         this.id = id;
@@ -33,8 +33,6 @@ public class Ruta {
         this.distancia = distancia;
         this.precio = precio;
     }
-    
-    // Set Y Get
 
     public void setId(int id) {
         this.id = id;
@@ -75,8 +73,6 @@ public class Ruta {
     public float getPrecio() {
         return precio;
     }
-    
-    //toString
 
     @Override
     public String toString() {

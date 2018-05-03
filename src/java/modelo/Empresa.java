@@ -11,7 +11,6 @@ package modelo;
  */
 public class Empresa {
     
-    // Variables
     private int id_empresa;
     private String nombre;
     private String direccion;
@@ -19,7 +18,6 @@ public class Empresa {
     private String web;
     private String email;
     
-    //Contructores
     /**
      * Contructor de la clase Empresa con todos los parametros
      * @param id_empresa El parámetro id corresponde al id de la tabla datos_empresa
@@ -37,7 +35,6 @@ public class Empresa {
         this.email = email;
     }
     
-    // Set Y Get
     public void setId_empresa(int id_empresa) {
         this.id_empresa = id_empresa;
     }
@@ -85,8 +82,6 @@ public class Empresa {
     public String getEmail() {
         return email;
     }
-    
-    //toString
 
     @Override
     public String toString() {

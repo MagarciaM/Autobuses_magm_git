@@ -29,7 +29,7 @@
         <div class="contenido">
             <div class="container-fluid">
                 <div class="col-md-12">
-                    <h1> <% out.print(objEmpresa.getNombre());%> </h1>
+                    <img src="./img/logo1.svg" width="300" style="margin: 10px;">
                 </div>
                 <div class="row">
                     <div class="col-md-9">
@@ -50,17 +50,17 @@
                                             Indica el numero de asiento de cada pasajero
                                         </div>
                                         <div class="card-body">
-                                            <form name="formularioAsientos" class="row" method="post" accept-charset="utf-8" action="servlet_asientos">
-                                                <div class="form-group row">
+                                            <form name="formularioAsientos" method="post" accept-charset="utf-8" action="servlet_asientos">
+                                                <div class="form-group row col-md-12">
                                                     <% for (int i = 0; i < objBillete.getObjSeleccionado().getnBilletes(); i++) {%>
 
                                                     <%
                                                         String nombre = arrayViajerosNuevos.get(i ).getNombre();
                                                     %>
 
-                                                    <label id="nombrePasajero<% out.print(i); %>" class="col-sm-8 col-form-label"><p><% out.print(nombre); %> </p></label>
-                                                    <div class="col-sm-4">
-                                                        <select class="form-control" id="selectViajero<% out.print(i); %>" name="asiento<% out.print(i); %>">
+                                                    <label id="nombrePasajero<% out.print(i); %>" class="col-md-7 col-form-label"><p><% out.print(nombre); %> </p></label>
+                                                    <div class="col-md-5">
+                                                        <select class="form-control" onchange="select_asiento('<% out.print(array_plazasLibres); %>');" id="selectViajero<% out.print(i); %>" name="asiento<% out.print(i); %>">
                                                             <% for (int j = 0; j < array_plazasLibres.size(); j++) {%>
 
                                                             <option value="<% out.print(array_plazasLibres.get(j)); %>"> Nº<% out.print(array_plazasLibres.get(j)); %> </option>
@@ -81,7 +81,7 @@
                     <div class="col-md-3">
                         <!--form method="post" accept-charset="utf-8" action="servlet_viaje_seleccionado"-->
                         <a href="vista_infoViajeros.jsp" class="btn btn-secondary"> Atrás </a>
-                        <button onclick="continuar_selecAsientos();" class="btn btn-primary"> Continuar </button><br><br>
+                        <button onclick="continuar_selecAsientos('<% out.print(objBillete.getObjSeleccionado().getnBilletes());%>');" class="btn btn-primary"> Continuar </button><br><br>
                         <div class="card bg-info border-info">
                             <div class="card-header text-white text-center">
                                 <h5> Resumen </h5>

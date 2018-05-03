@@ -1,0 +1,17 @@
+BEGIN
+
+	INSERT INTO backup_viajero SELECT * FROM viajero WHERE id_viajero IN (SELECT id_viajero FROM ocupacion WHERE id_reserva IN (SELECT id_reserva FROM reserva WHERE id_viaje = OLD.id_viaje));
+	
+	INSERT INTO backup_viaje SELECT * FROM viaje WHERE id_viaje = OLD.id_viaje;
+	
+	INSERT INTO backup_reserva SELECT * FROM reserva WHERE id_viaje = OLD.id_viaje;
+	
+	INSERT INTO backup_ocupacion SELECT * FROM ocupacion WHERE id_reserva IN (SELECT id_reserva FROM reserva WHERE id_viaje = OLD.id_viaje);
+	
+	DELETE FROM ocupacion WHERE id_reserva IN (SELECT id_reserva FROM reserva WHERE id_viaje = OLD.id_viaje);
+	
+	DELETE FROM reserva WHERE id_viaje = OLD.id_viaje;
+	
+	DELETE FROM viajero WHERE id_viajero NOT IN (SELECT id_viajero FROM ocupacion);
+	
+END

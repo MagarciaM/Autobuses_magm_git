@@ -26,7 +26,7 @@
         <div class="contenido">
             <div class="container-fluid">
                 <div class="col-md-12">
-                    <h1> <% out.print(objEmpresa.getNombre());%> </h1>
+                    <img src="./img/logo1.svg" width="300" style="margin: 10px;">
                 </div>
                 <div class="row">
                     <div class="col-md-9">
@@ -58,7 +58,8 @@
                                                         <!--form-->
                                                             <div class="form-group">
                                                                 <label for="dni<% out.print(i); %>"> DNI </label>
-                                                                <input type="text" class="form-control" id="dni<% out.print(i); %>" name="dni<% out.print(i); %>" required>
+                                                                <input type="text" class="form-control" id="dni<% out.print(i); %>" name="dni<% out.print(i); %>" onBlur="comprobarDni('dni<% out.print(i); %>','mensajedni_viajero');" required>
+                                                                <div class="" id="mensajedni_viajero"></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="nombre<% out.print(i); %>"> Nombre </label>

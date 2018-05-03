@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 public class servlet_preHome extends HttpServlet {
 
     private Connection Conexion;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,30 +36,33 @@ public class servlet_preHome extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            // Extraemos todas las estaciones 
-            ArrayList<Estacion> arrayEstaciones = new Operaciones(Conexion).getEstaciones(); 
-            out.print(arrayEstaciones);
-            
-            // Subimos el arrayEstacion a session para recoerlo en el home
-            HttpSession session = request.getSession(true);
-            session.setAttribute("arrayEstaciones",arrayEstaciones);
-            
-            // Extraemos la información de la empresa
-            Empresa objEmpresa = new Operaciones(Conexion).getDatos_empresa();
-            // Subimos a session el obj_empresa
-            session.setAttribute("objEmpresa", objEmpresa);
-            response.sendRedirect("vista_home.jsp");
-            
-        } catch (AplicationErrorException aex) {
-            
+
+            try {
+                // Extraemos todas las estaciones 
+                ArrayList<Estacion> arrayEstaciones = new Operaciones(Conexion).getEstaciones();
+                out.print(arrayEstaciones);
+
+                // Subimos el arrayEstacion a session para recoerlo en el home
+                HttpSession session = request.getSession(true);
+                session.setAttribute("arrayEstaciones", arrayEstaciones);
+
+                // Extraemos la información de la empresa
+                Empresa objEmpresa = new Operaciones(Conexion).getDatos_empresa();
+                //out.print(objEmpresa);
+                // Subimos a session el obj_empresa
+                session.setAttribute("objEmpresa", objEmpresa);
+                response.sendRedirect("vista_home.jsp");
+                
+            } catch (AplicationErrorException aex) {
+                out.print(aex);
+            }
         }
-            
     }
 
     @Override
     public void init() throws ServletException {
         //super.init(); //To change body of generated methods, choose Tools | Templates.
-        
+
         /* Establecemos la conexión, si no existe */
         try {
             ConexionBBDD ConexBD = ConexionBBDD.GetConexion();
@@ -68,7 +72,6 @@ public class servlet_preHome extends HttpServlet {
         }
     }
 
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

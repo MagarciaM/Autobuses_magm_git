@@ -19,7 +19,13 @@ public class PosibleViaje {
     private int duracion; // Parámetro calculado
     private int plazas_ocupadas;
     ArrayList<ViajeroAsiento> viajerosAsiento;
-
+    
+    /**
+     * Contructor
+     * @param hora_salida LocalDate, nos indica la hora de salida del viaje
+     * @param hora_llegada LocalDate, nos indica la hora de llegada del viaje
+     * @param plazas_ocupadas int, nos indica las plazas ocupadas del viaje
+     */
     public PosibleViaje(LocalTime hora_salida, LocalTime hora_llegada, int plazas_ocupadas) {
         this.hora_salida = hora_salida;
         this.hora_llegada = hora_llegada;
@@ -27,6 +33,13 @@ public class PosibleViaje {
         this.plazas_ocupadas = plazas_ocupadas;
     }
     
+    /**
+     * Contructor
+     * @param hora_salida LocalDate, nos indica la hora de salida del viaje
+     * @param hora_llegada LocalDate, nos indica la hora de llegada del viaje
+     * @param plazas_ocupadas int, nos indica las plazas ocupadas del viaje
+     * @param viajerosAsiento ArrayList, que contiene objetos de la clase ViajeroAsiento
+     */
     public PosibleViaje(LocalTime hora_salida, LocalTime hora_llegada, int plazas_ocupadas, ArrayList<ViajeroAsiento> viajerosAsiento) {
         this.hora_salida = hora_salida;
         this.hora_llegada = hora_llegada;

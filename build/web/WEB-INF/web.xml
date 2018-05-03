@@ -24,6 +24,30 @@
         <servlet-name>servlet_asientos</servlet-name>
         <servlet-class>servlet.servlet_asientos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servlet_registroCliente</servlet-name>
+        <servlet-class>servlet.servlet_registroCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet_registroTarjeta</servlet-name>
+        <servlet-class>servlet.servlet_registroTarjeta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>serlet_guardarDatos</servlet-name>
+        <servlet-class>servlet.serlet_guardarDatos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet_loginCliente</servlet-name>
+        <servlet-class>servlet.servlet_loginCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet_selectTarjeta</servlet-name>
+        <servlet-class>servlet.servlet_selectTarjeta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servlet_backup</servlet-name>
+        <servlet-class>servlet.servlet_backup</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servlet_preHome</servlet-name>
         <url-pattern>/servlet_preHome</url-pattern>
@@ -47,6 +71,30 @@
     <servlet-mapping>
         <servlet-name>servlet_asientos</servlet-name>
         <url-pattern>/servlet_asientos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_registroCliente</servlet-name>
+        <url-pattern>/servlet_registroCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_registroTarjeta</servlet-name>
+        <url-pattern>/servlet_registroTarjeta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>serlet_guardarDatos</servlet-name>
+        <url-pattern>/serlet_guardarDatos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_loginCliente</servlet-name>
+        <url-pattern>/servlet_loginCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_selectTarjeta</servlet-name>
+        <url-pattern>/servlet_selectTarjeta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servlet_backup</servlet-name>
+        <url-pattern>/servlet_backup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

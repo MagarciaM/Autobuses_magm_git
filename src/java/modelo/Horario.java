@@ -13,8 +13,6 @@ import java.time.LocalTime;
  */
 public class Horario {
     
-    // Variables
-    
     private int id;
     private int id_ruta;
     private LocalTime hora_salida;
@@ -23,11 +21,11 @@ public class Horario {
 
     /**
      * Contructor de la clase Horario con todos los parametros
-     * @param id Parámetro de id de horario
-     * @param id_ruta Parámetro de id de la ruta a la que corresponde el horario
-     * @param hora_salida Párametro que nos idica la hora de salida
-     * @param hora_llegada Párametro que nos idica la hora de llegada
-     * @param dia Parámetro que nos indica si el dia el Normal ('R') o especial ('E')
+     * @param id int, hace refecencia al id_horario que se encuentra en la base de datos
+     * @param id_ruta int, hace referencia de id de la ruta a la que corresponde el horario
+     * @param hora_salida LocalTime, que nos idica la hora de salida
+     * @param hora_llegada LocalTime, que nos idica la hora de llegada
+     * @param dia String, nos indica si el dia el Normal ('R') o especial ('E')
      */
     public Horario(int id, int id_ruta, LocalTime hora_salida, LocalTime hora_llegada, String dia) {
         this.id = id;
@@ -38,14 +36,12 @@ public class Horario {
     }
  
     /**
-     * 
-     * @param id Parámetro id de horario
+     * Contructor
+     * @param id int, hace refecencia al id_horario que se encuentra en la base de datos
      */
     public Horario(int id) {
         this.id = id;
     }
-    
-    // Set Y Get
 
     public void setId(int id) {
         this.id = id;
@@ -86,8 +82,6 @@ public class Horario {
     public String getDia() {
         return dia;
     }
-    
-    //toString
 
     @Override
     public String toString() {

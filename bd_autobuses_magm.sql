@@ -13,10 +13,12 @@
 
 
 -- Volcando estructura de base de datos para bd_autobuses_magm
+DROP DATABASE IF EXISTS `bd_autobuses_magm`;
 CREATE DATABASE IF NOT EXISTS `bd_autobuses_magm` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `bd_autobuses_magm`;
 
 -- Volcando estructura para tabla bd_autobuses_magm.cliente
+DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE IF NOT EXISTS `cliente` (
   `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
   `nif` varchar(9) DEFAULT NULL,
@@ -28,13 +30,14 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   PRIMARY KEY (`id_cliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bd_autobuses_magm.cliente: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bd_autobuses_magm.cliente: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
 REPLACE INTO `cliente` (`id_cliente`, `nif`, `nombre`, `apellidos`, `direccion`, `email`, `telefono`) VALUES
 	(1, '07565642e', 'fran', 'saez', 'baños', 'fran@yosoytupadre.espace', '629950722');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.datos_empresa
+DROP TABLE IF EXISTS `datos_empresa`;
 CREATE TABLE IF NOT EXISTS `datos_empresa` (
   `id_empresa` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL DEFAULT '0',
@@ -45,13 +48,14 @@ CREATE TABLE IF NOT EXISTS `datos_empresa` (
   PRIMARY KEY (`id_empresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bd_autobuses_magm.datos_empresa: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bd_autobuses_magm.datos_empresa: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `datos_empresa` DISABLE KEYS */;
 REPLACE INTO `datos_empresa` (`id_empresa`, `nombre`, `direccion`, `nif`, `web`, `email`) VALUES
 	(1, 'La Linea', 'C/ Doctor Garcia Nº77', 'A41526384', 'http://www.magarciam.com', 'contacto@magarciam.com');
 /*!40000 ALTER TABLE `datos_empresa` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.estacion
+DROP TABLE IF EXISTS `estacion`;
 CREATE TABLE IF NOT EXISTS `estacion` (
   `id_estacion` int(11) NOT NULL AUTO_INCREMENT,
   `localidad` varchar(50) NOT NULL DEFAULT '0',
@@ -69,6 +73,7 @@ REPLACE INTO `estacion` (`id_estacion`, `localidad`, `direccion`, `nombre`) VALU
 /*!40000 ALTER TABLE `estacion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.horario
+DROP TABLE IF EXISTS `horario`;
 CREATE TABLE IF NOT EXISTS `horario` (
   `id_horario` int(11) NOT NULL AUTO_INCREMENT,
   `id_ruta` int(11) DEFAULT NULL,
@@ -89,46 +94,47 @@ REPLACE INTO `horario` (`id_horario`, `id_ruta`, `hora_salida`, `hora_llegada`, 
 /*!40000 ALTER TABLE `horario` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.ocupacion
+DROP TABLE IF EXISTS `ocupacion`;
 CREATE TABLE IF NOT EXISTS `ocupacion` (
   `id_ocupacion` int(11) NOT NULL AUTO_INCREMENT,
   `id_viajero` int(11) NOT NULL DEFAULT '0',
-  `id_viaje` int(11) NOT NULL DEFAULT '0',
+  `id_reserva` int(11) NOT NULL DEFAULT '0',
   `num_asiento` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_ocupacion`),
-  UNIQUE KEY `id_viaje_num_asiento` (`id_viaje`,`num_asiento`),
+  UNIQUE KEY `id_viaje_num_asiento` (`id_reserva`,`num_asiento`),
   KEY `id_viajero` (`id_viajero`),
-  CONSTRAINT `id_viaje` FOREIGN KEY (`id_viaje`) REFERENCES `viaje` (`id_viaje`),
+  CONSTRAINT `id_reserva` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id_reserva`),
   CONSTRAINT `id_viajero` FOREIGN KEY (`id_viajero`) REFERENCES `viajero` (`id_viajero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bd_autobuses_magm.ocupacion: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bd_autobuses_magm.ocupacion: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ocupacion` DISABLE KEYS */;
-REPLACE INTO `ocupacion` (`id_ocupacion`, `id_viajero`, `id_viaje`, `num_asiento`) VALUES
+REPLACE INTO `ocupacion` (`id_ocupacion`, `id_viajero`, `id_reserva`, `num_asiento`) VALUES
 	(1, 1, 1, 5);
 /*!40000 ALTER TABLE `ocupacion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.reserva
+DROP TABLE IF EXISTS `reserva`;
 CREATE TABLE IF NOT EXISTS `reserva` (
   `id_reserva` int(11) NOT NULL AUTO_INCREMENT,
   `id_viaje` int(11) NOT NULL DEFAULT '0',
-  `id_viajero` int(11) NOT NULL DEFAULT '0',
-  `id_cliente` int(11) NOT NULL DEFAULT '0',
+  `id_tarjeta` int(11) NOT NULL DEFAULT '0',
+  `localizador` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_reserva`),
   KEY `id_viaje_r` (`id_viaje`),
-  KEY `id_cliente_r` (`id_cliente`),
-  KEY `id_viajero_r` (`id_viajero`),
-  CONSTRAINT `id_cliente_r` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
-  CONSTRAINT `id_viaje_r` FOREIGN KEY (`id_viaje`) REFERENCES `viaje` (`id_viaje`),
-  CONSTRAINT `id_viajero_r` FOREIGN KEY (`id_viajero`) REFERENCES `viajero` (`id_viajero`)
+  KEY `id_cliente_r` (`id_tarjeta`),
+  CONSTRAINT `FK_reserva_tarjeta` FOREIGN KEY (`id_tarjeta`) REFERENCES `tarjeta` (`id_tarjeta`),
+  CONSTRAINT `id_viaje_r` FOREIGN KEY (`id_viaje`) REFERENCES `viaje` (`id_viaje`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bd_autobuses_magm.reserva: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bd_autobuses_magm.reserva: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-REPLACE INTO `reserva` (`id_reserva`, `id_viaje`, `id_viajero`, `id_cliente`) VALUES
-	(1, 1, 1, 1);
+REPLACE INTO `reserva` (`id_reserva`, `id_viaje`, `id_tarjeta`, `localizador`) VALUES
+	(1, 1, 1, '0');
 /*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.ruta
+DROP TABLE IF EXISTS `ruta`;
 CREATE TABLE IF NOT EXISTS `ruta` (
   `id_ruta` int(11) NOT NULL AUTO_INCREMENT,
   `id_estacion_origen` int(11) NOT NULL DEFAULT '0',
@@ -152,6 +158,7 @@ REPLACE INTO `ruta` (`id_ruta`, `id_estacion_origen`, `id_estacion_destino`, `di
 /*!40000 ALTER TABLE `ruta` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.tarjeta
+DROP TABLE IF EXISTS `tarjeta`;
 CREATE TABLE IF NOT EXISTS `tarjeta` (
   `id_tarjeta` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(16) NOT NULL DEFAULT '0',
@@ -164,13 +171,14 @@ CREATE TABLE IF NOT EXISTS `tarjeta` (
   CONSTRAINT `id_cliente_c` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bd_autobuses_magm.tarjeta: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bd_autobuses_magm.tarjeta: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `tarjeta` DISABLE KEYS */;
 REPLACE INTO `tarjeta` (`id_tarjeta`, `numero`, `fecha_cad`, `id_cliente`, `cvv`) VALUES
 	(1, '1111222233334444', '2018-12-20', 1, '555');
 /*!40000 ALTER TABLE `tarjeta` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.viaje
+DROP TABLE IF EXISTS `viaje`;
 CREATE TABLE IF NOT EXISTS `viaje` (
   `id_viaje` int(11) NOT NULL AUTO_INCREMENT,
   `id_horario` int(11) NOT NULL DEFAULT '0',
@@ -190,6 +198,7 @@ REPLACE INTO `viaje` (`id_viaje`, `id_horario`, `fecha`, `plazas_ocupadas`) VALU
 /*!40000 ALTER TABLE `viaje` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bd_autobuses_magm.viajero
+DROP TABLE IF EXISTS `viajero`;
 CREATE TABLE IF NOT EXISTS `viajero` (
   `id_viajero` int(11) NOT NULL AUTO_INCREMENT,
   `nif` varchar(9) DEFAULT NULL,
@@ -200,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `viajero` (
   UNIQUE KEY `nif` (`nif`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bd_autobuses_magm.viajero: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bd_autobuses_magm.viajero: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `viajero` DISABLE KEYS */;
 REPLACE INTO `viajero` (`id_viajero`, `nif`, `nombre`, `apellidos`, `fecha_nac`) VALUES
 	(1, '45868742r', 'miguel angel', 'garcia', '1997-07-27');

@@ -18,7 +18,14 @@ public class Viajero {
     private String nombre;
     private String apellidos;
     private LocalDate fechaNac;
-
+    
+    /**
+     * Contructor
+     * @param dni String, nos indica el dni del viajero
+     * @param nombre String, nos indica el nombre del viajero
+     * @param apellidos String, nos indica los apellidos del viajero
+     * @param fechaNac LocalDate, nos indica la fecha de nacimiento del viajero
+     */
     public Viajero(String dni, String nombre, String apellidos, LocalDate fechaNac) {
         this.dni = dni;
         this.nombre = nombre;
@@ -26,6 +33,14 @@ public class Viajero {
         this.fechaNac = fechaNac;
     }
     
+    /**
+     * Contructor
+     * @param idViajero int, nos indica el id que corresponde en la base de datos
+     * @param dni String, nos indica el dni del viajero
+     * @param nombre String, nos indica el nombre del viajero
+     * @param apellidos String, nos indica los apellidos del viajero
+     * @param fechaNac LocalDate, nos indica la fecha de nacimiento del viajero
+     */
     public Viajero(int idViajero, String dni, String nombre, String apellidos, LocalDate fechaNac) {
         this.dni = dni;
         this.nombre = nombre;

@@ -8,7 +8,7 @@ package dao;
 import java.sql.*;
 
 /**
- *
+ * Clase para realizar la conexión con la base de datos mediante Singleton
  * @author magm
  */
 public class ConexionBBDD {
